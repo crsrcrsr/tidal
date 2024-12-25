@@ -1,0 +1,165 @@
+
+
+
+setcps (140/60/4)
+
+hush
+
+--2C or not 2C--
+
+panic
+
+d3 
+	$ every 9 (# crush 4) $ every 12 ( striate 64 ) 
+	$ superimpose (+ up "<-12 -24>/4") 
+	$ up "[ 0 -1 [-3 6] <[17 16] 14>]/16" 
+	# s "ade" # speed 2 # gain 0.95
+	+ up (-12) # room 0.3 # sz 0.9 # lpf 1000 # legato 2
+
+d1 $ stack [
+	every 3 (0.25<~) 
+	$ every 7 ((ply 4).(# vowel "a e o a" ))
+	$ every 2 (# speed (-0.625)) 
+	$ rarely (ply 2) 
+--	$ s " aa:1 aa*2? [aa aa:1] aa " 
+	$ s "aa:1/2"
+	# delay 0.5 # delayt (4/16) # delayfb 0.5 # lock 1 
+	# pan rand 
+	# speed "[1]" # ring 0.5 
+	# ringf (range 300 3000 $ fast 16 rand) 
+	# room 0.5 # sz 0.9 # cut 1 # legato "<0.1 0.25 4>" # orbit 1 * gain 1 # hpf 40
+	, every 4 (# speed "-0.25") $ s "gabba*4? ~ ~ ~ " # orbit 2
+	, every 6 ((rev).(# speed (-0.5))) $ every 4 (plyWith 2 (# binshift 4)) 
+	$ s "[techno](7,16)" 
+	# n (irand 15) # cut 1 # room 0.3 # sz 0.9 # hpf 500
+]
+
+d2 $ striate 16 $ slow 4 $ s "ba:1?" 
+	# legato 0.1 # pan sine 
+	# up "<0 5>" + up (-0) 
+	# room 0.3 # sz 0.9
+
+d4 $ every 3 (# speed 0.5) 
+	$ every 5 rev $ (0.5 <~) 
+	$ superimpose( striate "<8 16 32 64>")
+	$ s " cp" 
+	# att 0.001 # rel 0.1 # room 0.5 # sz 0.9 # pan (fast 16 rand) # gain 1.1
+
+d5 $ iter 8 $ sometimes (rev) $ rarely (echoWith 2 4 ((* speed 0.75).(* gain 0.9)))
+	$ superimpose (# s "click:2")
+	$ s "[808bd:6]*16" 
+	# lpf "{4000 400 2000 700 10000}%[<16 8 5 4 7>*4]" 
+	# att "{ 0.004 0.001 0.05 0.01 0 }%16" 
+	# rel 0.5 
+	# cut 1 
+	# triode "[0|1|2]*16" # hpf (range 300 1000 $ fast 4 rand) 
+	# gain 1.1  
+	# delay "0 1" # delayt "[0.0001 0.003 0.01 1]" # delayfb 0.99 # lock 1
+
+
+d6 $ every 4 ((slow 2).(plyWith 2 (* gain 0.9))) 
+	$ gain "[1 0.4 0.7 0.1 0.1 0.7 0.1 0.9 ]*2 "  
+	# s "aa:2"  # lpf 10000
+	# room 0.5 # sz 0.5 # legato 0.5
+
+d3 silence
+
+d10 $ cps("<140 70 <35 70 140 >>/4" /60/4) 
+
+jumpIn 10 2 $ cps(140/60/4)
+
+--tunnelines--
+
+panic
+
+xfadeIn 1 32 $ silence
+
+d1 $ every 2 ( superimpose ((# vowel "a").(# pan rand).(# distort 0.2))) 
+	$ s "808bd:6*16" # cut 1 # crush (range 4 6 $ slow 16 sine) # speed 1 
+	# gain 1.2 # orbit 1
+
+do
+xfadeIn 2 8 $ silence
+xfadeIn 3 7 $ silence
+xfadeIn 4 9 $ silence
+xfadeIn 5 10 $ silence
+xfadeIn 6 11 $ silence
+
+d2 $ s "cp/2" 
+	# room 0.5 # sz 0.99  
+	# gain 1 
+	# delay 0.5 # delayfb 0.8 # lock 1 # delayt ("[<3 4 5 6>]/4"/16) 
+	# orbit 0
+	# lpf "<3000 10000>/2"
+
+xfadeIn 3 32 
+	$ every 5 ((plyWith 2 (+ up 7)).(slow 2)) 
+	$ almostNever (+ up 24 ) 
+	$ n "{0 <1 2 2 6> <8 7> 0 6}%16 " 
+	#  s "arpy" # room 0.2 # sz 0.98 # lpf (range 500 10000 $ slow 3 sine) 
+	# up (-24) # gain "[0.8|1.1]*16" 
+	# crush 6 # legato 1 # orbit 3
+	# delay (range 0 0.5 $ slow 9 sine) # delayfb 0.85 # lock 1 # delayt (3/16)
+	# att (range 0.01 0.05 $ slow 16 sine) # rel 0.1 
+	# hpf 200
+
+d4 
+	$ every 3 (# scram 0.2 ) 
+	$ (4<~) $ every 8 (# speed (-2)) $ every 4 (ply 4)
+	$ every 5 (# vowel "<a e i o>/5") 
+	$ every 3 ( # octer 1 ) 
+	$ s "[~ arpy] ~ < ~ > ~" 
+	# room 0.8 # sz 0.9 # lpf (range 400 1000 $ slow 7 sine) # up (-36) 
+	# delay 1 # delayt ("<3 5>"/16) # delayfb 0.9 # lock 1 
+	# att 0.01 # rel 0.5 # gain 1.2 # orbit 5  
+
+d6 $ rarely (rev) $ superimpose ((ghost).(+ up (7))) 
+	$ n "<[[0 5 3 2] ~ [0 6 4 3] ~ ] [] [[0 7 5 3] <8 7 0> ~ ~ ] [] >" 
+	# s "arpy" 
+	# room 0.5 # sz 0.9 
+	# gain 0.75 + n "<0 3>/8" 
+	# djf (range 0.3 0.7 $ slow 9 sine)
+
+d4 silence
+
+d5 
+	$ rarely ((slow 2).(ply 4).(# crush 4).(# legato "[0.25|1]").(* gain 0.9)) 
+	$ every 6 ( rev ) 
+	$ every 5 (slow 2) $ every 2 (jux (rev)) 
+	$ stack [
+--	always (# djf 0.8) $
+	superimpose ((# triode 10).(# crush 8)) 
+--	$ gain "1(6,16)"
+        $ gain "[1][1 ~ 0.8 1][[0 1] 0.8] <1 [1 0.8]> "
+        * gain 0.75
+	# s "[808bd:6,click:2]" * gain (1.2*1) # lpf 2000 # legato 1  
+	,ghost $ gain "1 [1.2 1] < 1 1*4 1*2 > <1 ~>"
+        # s "aa:1"
+        # lpf "5000 10000 500 2000 "
+        * gain (0.8)
+        # hpf 200
+]
+
+hush
+
+d4 silence
+
+d2 $ fast 2 $ s "~ 808sd:9" # gain 1
+
+d3 $ s "[cb,rm](7,16) " # speed 1 # gain "1 0.9 1.2 0.9"  * gain 0.75
+
+d1 $ n "[0 <5 8 7> 3 <8 [7 [2]] >]/8" # s "pd" # midichan 0 |+ n (-12)
+
+d5 $ every 6 (superimpose (+ n 7)) 
+	$ every 4 ((rev).(fast 2)) 
+	$ n "0 5 7 10 12 15 17 19" # s "pd" # midichan 1 
+	|+ n "<12 0 7 0>" # gain 1.2
+
+
+
+
+
+
+
+panic
+

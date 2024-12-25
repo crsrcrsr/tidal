@@ -1,0 +1,38 @@
+d7 $ cps (80/60/4)
+
+d12 $ slow 4 $ n  (run 64) # s "pd" # midichan 10 # legato 0.1
+
+d1 $ somecycles (# speed"1 1 2 1") $ s "gabba*2 ~ gabba ~" # cut 1 # lpf 4000
+
+d1 $ within (0.75, 1) ghost $ s "<[bd*2 [~ bd] ~ bd ] [ ~ ~ [~ bd] [crow]] >"  # distort 0.3 # crush 4
+
+d4 $(# pan rand) $ sometimes (# speed (-0.5)) 
+	$ (|* gain rand) 
+	$ s "cb*16"  # gain 0.9 + up "[14]*8" # speed "1 0.33" # room 0.8 # sz 0.9 
+
+d2 
+  $ fast 1
+	$ s "cp/4" 
+	# delayt (3/16) # delayfb 0.8 # lock 1 # delay 0.3 # speed "1 1" # gain 1.1
+	# room 0.3 # sz 0.99 # speed "<1 -0.5>/4"
+
+d3 $ s "click:2*16"# gain "[1 0.8 0.7 0.9]*4" # bpf (range 1000 5000 $ slow "<4 6 7 10 2>*4" sine) # bpq 4
+
+d5$ (# att 0.01) $ (# rel 0.08) $ sometimes (ply "[4|8|3|6|32|64]") 
+	$ (# speed "1") $ slow 4 $ striate "[64 |32| 8 | 4]" 
+	$ s "<ade:1 ade>" # gain 1.2
+
+d4 silence
+
+d8 $ sometimes (ply 4) $ n "0 ~ [~ 0] ~" # s "pd" # midichan 0 # legato 0.5 + n (-36)
+
+d9 $ every 4 rev $ n "12 0 5 6 24 12 8 4" 
+	# s "pd" # midichan 3 # legato "0.5 0.3"
+
+d10 $ ccv "{0 3 5 60 120}%16" # ccn 1 # s "pd" # midichan 1  
+
+d11 $ ccv "{0 3 5 7 8 60 14 0}%16" # ccn 10 # s "pd" # midichan 1
+
+d1 silence
+
+hush

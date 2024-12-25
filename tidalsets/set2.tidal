@@ -1,0 +1,41 @@
+
+let 	si = (# s ("~"))
+	flood msg = let	io_flood = [putStr (msg) | x <- replicate 3000 msg] in sequence_ $ io_flood 
+
+d1 
+--	$ every 4 ((#speed (-1)).(rev)) 
+	$ stack[
+--	si $ -- (clicks)
+	 every 16 (ply "1 2")
+	$ within (0.75, 1) (# pan rand) $ up "c10*16 " # s "sine" 
+	# rel 0.1 # att 0 # legato "[1 0.01!2 1] 0.1 0.1 0.8" 
+	# gain "1 0.8!31" 
+	* gain "1 0.8 1 [0 1.1]" # accelerate (slow 4 sine) 
+	# orbit 1 * gain "<1 0 1 0 1 1>*2"
+	, 
+--	si $ 
+	superimpose (# triode "0 4") 
+	$ gain "1.05 [~ 1/4] [~ 0.8/2 0.9 0] [0.9*2 ~]" 
+	# s "[808bd:6,click:2]" # lpf 500 # orbit 1
+	, 
+--	si $
+	gain "0 1 0 1" #  s "click:2" # room 0.1 # sz 0.5 # orbit 2
+]
+
+d2 
+--	$ si 
+	$( # up "<0 7 2 1>/4") 
+	$ every 6 (# up 3) $ s "~ [~ moog/4] ~ ~" 
+	# speed "<1 0.5 -0.5>" 
+	# hpf "<100 500 600 300 200>/4" 
+	# lpf " <1000 500 600 2000>/4" 
+	# room 0.2 # sz 0.9 # orbit 3 
+	# cut 2 # att 0.01 # rel 2 
+	# delay 0.1 # delayt (4/16) # lock 1 # delayfb 0.9
+
+	
+hush
+
+do
+d1 silence
+d2 silence

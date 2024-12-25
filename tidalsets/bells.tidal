@@ -1,0 +1,36 @@
+
+
+
+
+
+
+setcps (50/60/4)
+
+hush
+
+panic
+
+d1 $ sometimes (# speed "-0.5") $ somecyclesBy 0.25 (superimpose (fast 4).(+ up "24").(# gain "1 0")) 
+	$ superimpose ("0.125 0.5"<~)
+	$ every 3 (jux (rev)) 
+	$ every 5 rev 
+	$ s "arpy" 
+	+ n (run "16" ) + up "<0 5 7 2>" + up ("<-12 0 24>*2")
+	# delayt (1.5/16) # delay 0.5 # lock 1 # delayfb 0.8 
+--	# lpf "[150|700|500|5000]*16" 
+--	# pan (range 0.25 0.75 $ fast 1 sine)
+--	# room 0.5 # sz 0.9 # gain 0.8
+
+
+clutchIn 1 5 $ degrade $ ghost $ sometimes (# speed "-0.5") 
+	$ somecyclesBy 0.25 (superimpose (fast 4).(+ up "24").(# gain "1 0")) 
+	$ superimpose ("0.125 0.5"<~)
+	$ every 3 (jux (rev)) 
+	$ every 5 rev 
+	$ s "arpy" 
+	+ n (run "8" ) + up "<0 5 7 2>" + up ("<-12 0 24>*2")
+	# delayt (1.5/16) # delay 0.5 # lock 1 # delayfb 0.8 
+	# lpf "[150|600|100|500]*16" 
+	# pan (range 0.25 0.75 $ fast 1 sine)
+	# room 0.5 # sz 0.9 # gain 0.8 # crush 4
+

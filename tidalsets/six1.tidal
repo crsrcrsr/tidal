@@ -1,0 +1,118 @@
+hush
+
+flood "six <> hok <> "
+
+let six1 = "{1 1 0}%16"
+    six2 = "{1 0 0 0 0 1 0}%16"
+    six3 = "{1 0 1 0 0 1 1 0 1 0}%16"
+    six4 = "{1 0 1 0 0 0 0 0 1 0 1 0}%16"
+    six5 = "{1 0 0 0 0 0 1 0 0 0 1 1 0 1 0 1 0}%16"
+    six6 = "{1 0 1 0 0 0 1 0 1 1 0 0 0 0 1 0 1 0 1 0}%16"
+
+d6 $ stack [
+--	si $
+	 s "~ ~ numbers:6" # speed (1) # hpf 100 # crush 6 
+	, 
+-- 	si $ 
+	rarely (plyWith "[4|16| 32]" (# gain 0.8)) $ 
+	n "<[18 8 23 ~ ~ ~] [18 23 18 8 8]?>" # s "alphabet" # ring "0 1" 
+	# ringf 6666 # lpf 666 
+]
+
+do 
+d6 silence
+
+hush
+
+d7 
+	$ whenmod 16 6 (# djf 0.6)
+	$ whenmod 16 7 (# crush 6)
+--	$ every 16 (* speed 0.6) 
+--	$ every 6 (# pan six6 ) $  (6 <~) 
+--	$ somecyclesBy 0.16 (# speed "1 1 1 -0.6") 
+	$ sometimesBy 0.06 (ply 4) 
+--	$ every 6 rev 
+	$ stack [
+--	si $
+	gain six6 # s "[808bd:6|bd]"
+	,
+--	si $
+	gain six5 # s "click:2"
+	,
+--	si $
+        sometimes ((#room 0.5 ).(#sz 0.9)) $ (66 <~) $ 
+	somecycles ((# delay 0.5 ).(# delayt (3/16)).(# delayfb 0.6).(#lock 1)) 
+	$ gain six4 # s "bin" # orbit 3 # speed 1.6
+	,
+--	si $
+	gain six3 # s "rm" |+ speed six4 # speed 1 * speed 2
+	,
+--	si $
+	gain six2 # s "hh"  
+	,
+--	si $
+	gain six1 # s "cp" # lpf 6000 |* lpf six6 |+ lpf 600 # lpq 0.1
+] 
+
+d1 silence
+
+panic
+
+d1 $ stack[
+--	si $ 
+--	echoWith 7 (2/16) ((* gain 0.9).(* lpf (0.75))) $ 
+	gain six1
+	# s "bd:6"  # lpf 15000  # lpq 0.3 
+--	# speed (-0.5)
+	,  
+--	si $ 
+	(/ lpf "<1.1 1.2 1.3 1.4>") $ 
+	gain six3 # s "aa:2" * gain "[1.1 0.8 0.7 0.7] 0.9 0.8 [1.1 0.9]" 
+	# lpf "2000 2100 ~ [1900 750] " 
+	# lpq "0.7 [0.2 0.7] 0.2 0.4" # room 0.3 # sz 0.9
+	# hpf 1000 
+]
+
+d3 $ ply 1 $ jux rev $  (fast "[1 1 2 1 1 2 4 1]/2") 
+	$ every 3 (superimpose (slow 2).(+ up (7) )) 
+	$ up (scale "chinese" ("{0 4 6}%8"+"{-12 0 6 3 12}%4") ) 
+	# s "cb"  
+	# hpf 200 + up "<0 12 -12 24>/4" 
+	# gain 0.8 # room 0.2  # sz 0.9 # speed 0.25
+
+d2 $ jux rev $ (1<~) $ every 2 ((plyWith "<[1 2 4 2] 2 >/4"(/ speed (2) )))
+	$ plyWith 2 (# gain 0.7) 
+	$ s "print:1*4" # speed 2 # crush 4 # legato 1 # lpf "[1000 1000 4000 1000]*4"
+
+d8 $ s " ~ ~ [ ~ bass:1] [~ bass:1 ~ ~]" # lpf "<1000 4000 5000 10000>"# gain 1.1 # room 0.3 # sz 0.9
+
+d2 silence
+
+hush
+
+------------------------------------------------------------------------------------
+
+flood "[halls] "
+
+d2 $ mask "1 1 1 1"
+	$ rarely ((echoWith 8 ((choose[1,3,5])/16) (* gain 0.9)).(# legato 4)) 
+	$ (32<~) 
+	$ sometimes (# speed (-2)) 
+	$ up "[0 12 6 7]*2"# n "0 2 3 7"  # s "pluck" 
+	# scram (choose [1,0,0.2]) # room 0.2 # sz 0.9 
+	|+ up (choose[0, 12, 24]) # pan rand 
+--	# cps ("[120| 60| 90| 150| 180]*4"/60/4) 
+
+d1 $ (|* lpf (range 0.7 1 $ slow 8 sine )) 
+	$ superimpose ((# room 1 ).(# sz 0.9).(# gain 0.25).(# hpf 500))
+	$ s "808bd:6/2" 
+	# lpf 500 # lpq (range 0.3 0.9 $ slow 5 sine)
+	# delay 0.3 # delayt(6/16) # delayfb 0.9 # lock 1 # gain 1  # hpf 0
+
+d4 $ s "~ ~ ~ <[lighter*8]/2 ~> " # speed (1) # legato 1 # gain "0 0 0 [0.5 0.7 0.8 1]"
+
+d5 $ superimpose (# speed (0.25)) 
+	$ s "pebbles/4" # cut 5 
+	# bpf 5000 # bpq 3 
+	# speed 1 # gain 0.8 
+	# room 0.2 # sz 0.99

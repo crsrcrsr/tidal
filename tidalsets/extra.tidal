@@ -1,0 +1,28 @@
+
+
+
+d2 $ s "bd(4,16)"
+
+d6 $ s "[~ cp]*2"
+
+d4 $ every 3 (# speed "1 -2") $ s "[tabla:4]*2 " # delay 0.5 # delayfb 0.8 # delayt (3/16) # lock 1 # up "<0 -12>"
+
+d1 silence
+
+d3 $ rarely (ply "<8 4 2>") 
+	$ s "coins:1*16" 
+	# cut 1 
+	# legato "[0.125|0.25]*16" 
+	# pan rand # n (run 16)
+
+hush
+
+d5 
+	$ rarely (* speed (-0.5)) 
+	$ (# gain "{1 0 0.8 1 0 0 1.1 0 }%16") 
+	$ chop "<32>"
+	$ s "breaks125:0/1" 
+	# up "<0>" # room 0 # sz 0.9 # att 0 # rel 1
+
+setcps(125/60/4)
+
